@@ -34,11 +34,16 @@ public class AccountController {
 	 * 新規アカウント作成
 	 *
 	 * @param email            メールアドレス
+	 * @NotBlank(message = "正しいメールアドレスを入力してください")
 	 * @param password         パスワード
+	 * @size(min = 8,message = "パスワードは半角英数8文字以上にしてください。")
+	 * @Pattern()
 	 * @param passwordForCheck 確認用パスワード
+	 * @Patern(message"パスワードが一致しません")
 	 * @param model
 	 * @return ホーム画面に遷移
 	 */
+	
 	@Transactional
 	@RequestMapping(value = "/createAccount", method = RequestMethod.POST)
 	public String createAccount(Locale locale, @RequestParam("email") String email,
@@ -48,14 +53,23 @@ public class AccountController {
 		logger.info("Welcome createAccount! The client locale is {}.", locale);
 
 		// バリデーションチェック、パスワード一致チェック（タスク１）
+		if (password.length() >=8 && password.matches("[a-zA-Z0-9]+"))
+			if (password.equals(passwordForCheck)) {
 
-		
+	
 		// パラメータで受け取ったアカウント情報をDtoに格納する。
 		UserInfo userInfo = new UserInfo();
 		userInfo.setEmail(email);
 		userInfo.setPassword(password);
 		usersService.registUser(userInfo);
 		return "redirect:/login";
+	
+	       }else {
+	    	   model.addAttribute("errorMessage","パスワードが一致しません。");
+	           return "createaccount";
+        }else {
+    	 System.out.println("パスワードは8文字以上かつ半角英数に設定してください");
+	     return "createAccount";
+	     }
 	}
-
 }
