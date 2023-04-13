@@ -60,10 +60,10 @@ public class AccountController {
 
 			} else {
 				model.addAttribute("errorMessage", "パスワードが一致しません。");
-				return "createaccount";
+				return "createAccount";
 			}
 		else {
-			model.addAttribute("errorMassage", "パスワードが一致しません。");
+			model.addAttribute("errorMessage", "パスワードが一致しません。");
 			return "createAccount";
 		}
 	}
