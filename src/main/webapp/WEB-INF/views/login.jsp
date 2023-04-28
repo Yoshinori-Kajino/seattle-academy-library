@@ -28,14 +28,28 @@
                     </c:if>
                     <input type="submit" class="button primary" value="ログイン" />
                 </form>
+                <div class="authorization">
+                    <div class="authorization_form">
+                        <form method="post" action="login">
+                            <div class="title">ログイン</div>
+                            <label class="label">メールアドレス</label> <input type="text" class="input" name="email" id="email" autocomplete="off" required /> <label class="label">パスワード</label> <input type="password" class="input" id="password" name="password" required />
+                            <c:if test="${!empty errorMessage}">
+                                <div class="error">${errorMessage}</div>
+                            </c:if>
+                            <input type="submit" class="button primary" value="更新" />
+                        </form>
+                    </div>
+                    <div class="authorization_navi">
+                        <label class="authorization_text">まだアカウントをお持ちでないですか？</label> <a class="authorization_link marker" href="<%=request.getContextPath()%>/newAccount">アカウント作成</a>
+                    </div>
+                </div>
+                <form method="post" action="PasswordResetController" name="passwordreset">
+                    <input type="hidden" id="bookId" name="bookId" value="${email}">
+                    <button type="submit" id="passwordresetbtn" class="btn_passwordreset">変更</button>
+                </form>
+                <footer>
+                    <div class="copyright">© 2019 Seattle Consulting Co., Ltd. All rights reserved.</div>
+                </footer>
             </div>
-            <div class="authorization_navi">
-                <label class="authorization_text">まだアカウントをお持ちでないですか？</label> <a class="authorization_link marker" href="<%=request.getContextPath()%>/newAccount">アカウント作成</a>
-            </div>
-        </div>
-        <footer>
-            <div class="copyright">© 2019 Seattle Consulting Co., Ltd. All rights reserved.</div>
-        </footer>
-    </div>
 </body>
 </html>

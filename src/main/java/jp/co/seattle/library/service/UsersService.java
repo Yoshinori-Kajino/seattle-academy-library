@@ -52,4 +52,14 @@ public class UsersService {
 		}
 	}
 
+	public UserInfo PasswordresetInfo(String email, String password) {
+		try {
+			String sql = "UPDATE user SET email = ?, password = ? WHERE email =?;";
+			UserInfo selectedUserInfo = jdbcTemplate.queryForObject(sql, new UserCountRowMapper());
+			return selectedUserInfo;
+		} catch (Exception e) {
+			return null;
+		}
+	}
+
 }
